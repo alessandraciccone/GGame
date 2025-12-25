@@ -26,13 +26,11 @@ public class SecurityConfig {
         this.jwtFilter = jwtFilter;
     }
 
-    //   Password Encoder
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    //  Security Filter Chain
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -40,6 +38,8 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/health").permitAll()  // ← AGGIUNGI QUESTO
+                        .requestMatchers("/").permitAll()        // ← AGGIUNGI QUESTO
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -48,15 +48,20 @@ public class SecurityConfig {
         return http.build();
     }
 
-
-    //  CORS Config
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://tuo-frontend.vercel.app")); // cambia con l’URL del FE
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+
+        // Per testing senza frontend: permetti tutti gli origin
+        configuration.setAllowedOriginPatterns(List.of("*"));  // ← CAMBIA QUESTO
+
+        // Quando avrai il frontend, sostituisci con:
+        // configuration.setAllowedOrigins(List.of("https://tuo-frontend.vercel.app"));
+
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -64,7 +69,6 @@ public class SecurityConfig {
         return source;
     }
 
-    //  Authentication Manager
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration config) throws Exception {
