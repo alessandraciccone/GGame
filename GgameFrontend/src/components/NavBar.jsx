@@ -11,8 +11,9 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import profile from "../assets/img/profile.png";
 import game from "../assets/img/game.png";
 const navigation = [
-  { name: "Homepage", href: "#", current: true },
-  { name: "Registration", href: "#", current: false },
+  { name: "Homepage", href: "/", current: false },
+  { name: "Registration", href: "/Registration", current: false },
+
   { name: "Login", href: "#", current: false },
 ];
 
