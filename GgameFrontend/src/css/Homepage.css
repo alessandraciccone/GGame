@@ -1,0 +1,37 @@
+.typing{
+    display:inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight:bold;
+    animation:typing 3s steps(20) infinite,
+    blink .7s infinite,
+    neon 1.5s ease-in-out infinite alternate;
+}
+@keyframes typing{
+    0% {width: 0}
+    40%{ width:100%}
+    60%{width:100%}
+    100%{width: 0}
+}
+
+@keyframes blink{
+    50%{border-color: transparent}
+}
+
+@keyframes neon{
+    from{
+        text-shadow: 0 0 5px #fff,
+        0 0 10px #fff,
+0 0 20px #00eaff,
+0 0 40px #00eaff
+    }
+    to{
+        text-shadow: 0 0 10px #fff,
+        0 0 20px #00eaff,
+                0 0 30px #00eaff,
+                        0 0 60px #00eaff,
+
+
+
+    }
+}
