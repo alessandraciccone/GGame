@@ -48,21 +48,22 @@ const Registration = () => {
   return (
     <div className="max-w-md mx-auto mt-10">
       <form onSubmit={handleSubmit} className="space-y-6">
-        <h2 className="text-white text-lg font-semibold">Registrati!</h2>
+        <h2 className="text-white text-lg font-semibold text-center">
+          Registrati!
+        </h2>
 
         {successMessage && (
-          <div className="p-3 rounded-md bg-green-600 text-white text-center">
+          <div className="p-3 rounded-md bg-black border border-green-400 text-green-300 text-center animate-fadeIn shadow-[0_0_10px_#22c55e]">
             {successMessage}
           </div>
         )}
-
         <input
           type="text"
           name="nome"
           placeholder="Nome"
           value={formData.nome}
           onChange={handleChange}
-          className="w-full rounded-md bg-white/5 px-3 py-2 text-white"
+          className="w-full rounded-md bg-white px-3 py-2 text-white"
           required
         />
 
@@ -90,9 +91,14 @@ const Registration = () => {
           type="submit"
           className="w-full rounded-md bg-indigo-500 py-2 text-white font-semibold"
         >
-          Registrati
+          Registrati 🎮
         </button>
       </form>
+
+      <p className=" text-center text-white mt-10">
+        {" "}
+        Hai già un account? Login
+      </p>
     </div>
   );
 };
