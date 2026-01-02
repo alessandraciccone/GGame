@@ -11,12 +11,16 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import game from "../assets/img/game.png";
 const navigation = [
   { name: "Homepage", href: "/", current: false },
-  { name: "Registration", href: "/Registration", current: false },
+  { name: "Registration", href: "/registration", current: false },
 
-  { name: "Login", href: "#", current: false },
+  { name: "Login", href: "/login", current: false },
   { name: "Find your game", href: "#", current: false },
 ];
 
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  window.location.href = "/login";
+};
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -88,12 +92,12 @@ export default function NavBar() {
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">
               <MenuItem>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-200 hover:bg-white/10"
+                <button
+                  onClick={handleLogout}
+                  className="text-red-400 hover:text-red-300 transition"
                 >
-                  Sign out
-                </a>
+                  Sign Out
+                </button>
               </MenuItem>
             </Menu>
           </div>
