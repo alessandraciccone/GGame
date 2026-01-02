@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 const Registration = () => {
   const [formData, setFormData] = useState({
     nome: "",
@@ -96,8 +96,11 @@ const Registration = () => {
       </form>
 
       <p className=" text-center text-white mt-10">
-        {" "}
-        Hai già un account? Login
+        Hai già un account?{" "}
+        <Link to="/Login" className="text-red-400">
+          {" "}
+          Login{" "}
+        </Link>
       </p>
     </div>
   );
