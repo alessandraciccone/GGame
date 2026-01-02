@@ -50,7 +50,7 @@ const FindyourGame = () => {
 
         <button
           onClick={handleSearch}
-          className="bg-indigo-600 hover:indigo-700 px-4 py-2 rounded-md font-semibold"
+          className="bg-black border border-purple-400 px-4 py-2 rounded-md font-semibold"
         >
           Cerca
         </button>
@@ -58,11 +58,11 @@ const FindyourGame = () => {
       {loading && (
         <p className=" mt-6 text-center text-gray-400"> Caricamento</p>
       )}
-      <div className=" mt-8 grid gap-6">
+      <div className=" mt-8 grid gap-6 ">
         {games.map((game) => (
           <div
             key={game.id}
-            className="bg-white/5 p-4 rounded-md shadow-md hover:bg-white/10 transition"
+            className="bg-white/5 p-4 rounded-md shadow-md hover:bg-white/10 transition "
           >
             <h3 className=" text-lg font-bold text-indigo-300">
               {" "}
