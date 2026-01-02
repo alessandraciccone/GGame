@@ -23,7 +23,11 @@ public class JWTFilter extends OncePerRequestFilter {
         this.jwtTool=jwtTool;
         this.userDetailsService = userDetailsService;
     }
-
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getServletPath();
+        return path.startsWith("/proxy/");
+    }
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,

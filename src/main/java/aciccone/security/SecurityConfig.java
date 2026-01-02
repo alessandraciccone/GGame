@@ -38,8 +38,9 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/health").permitAll()  // ← AGGIUNGI QUESTO
-                        .requestMatchers("/").permitAll()        // ← AGGIUNGI QUESTO
+                        .requestMatchers("/proxy/**").permitAll()   // ← NECESSARIO
+                        .requestMatchers("/health").permitAll()
+                        .requestMatchers("/").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -52,15 +53,10 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // Per testing senza frontend: permetti tutti gli origin
-        configuration.setAllowedOriginPatterns(List.of("*"));  // ← CAMBIA QUESTO
-
-        // Quando avrai il frontend, sostituisci con:
-        // configuration.setAllowedOrigins(List.of("https://tuo-frontend.vercel.app"));
-
+        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(false);
         configuration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -68,7 +64,6 @@ public class SecurityConfig {
 
         return source;
     }
-
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration config) throws Exception {

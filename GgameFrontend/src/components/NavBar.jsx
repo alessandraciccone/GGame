@@ -14,7 +14,7 @@ const navigation = [
   { name: "Registration", href: "/registration", current: false },
 
   { name: "Login", href: "/login", current: false },
-  { name: "Find your game", href: "#", current: false },
+  { name: "Find your game", href: "/findyourgame", current: false },
 ];
 
 const handleLogout = () => {
