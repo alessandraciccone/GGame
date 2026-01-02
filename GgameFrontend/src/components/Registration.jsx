@@ -63,7 +63,7 @@ const Registration = () => {
           placeholder="Nome"
           value={formData.nome}
           onChange={handleChange}
-          className="w-full rounded-md bg-white px-3 py-2 text-white"
+          className="w-full rounded-md bg-white/5 px-3 py-2 text-white"
           required
         />
 
